@@ -1,7 +1,7 @@
-import Head from "next/head";
-import { Button, Flex, Text, Link } from "@chakra-ui/react";
-import { useAuth } from "@lib/auth";
-import { Logo } from "@icons/logo";
+import Head from 'next/head';
+import { Button, Flex, Text, Link } from '@chakra-ui/react';
+import { useAuth } from '@lib/auth';
+import { Logo } from '@icons/logo';
 
 export default function Home() {
   const { user, signinWithGithub } = useAuth();
@@ -34,15 +34,12 @@ export default function Home() {
         <Text as="span" fontWeight="bold" display="inline">
           Fast Feedback
         </Text>
-        {" is being built as part of "}
-        <Link
-          href="https://react2025.com"
-          isExternal
-          textDecoration="underline"
-        >
+        {' is being built as part of '}
+        <Link href="https://react2025.com" isExternal textDecoration="underline">
           React 2025
         </Link>
-        {`. It's the easiest way to add comments or reviews to your static site. It's still a work-in-progress, but you can try it out by logging in.`}
+        It's the easiest way to add comments or reviews to your static site. It's still a
+        work-in-progress, but you can try it out by logging in.
       </Text>
       {user ? (
         <Button as="a" size="sm" fontWeight="medium" href="/dashboard">

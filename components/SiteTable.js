@@ -1,7 +1,7 @@
-import React from "react";
-import { Box, Link } from "@chakra-ui/react";
-import { Table, Tr, Th, Td } from "./Table";
-import { format, parseISO } from "date-fns";
+import React from 'react';
+import { Box, Link } from '@chakra-ui/react';
+import { format, parseISO } from 'date-fns';
+import { Table, Tr, Th, Td } from './Table';
 
 function SitesTable({ sites }) {
   return (
@@ -12,7 +12,7 @@ function SitesTable({ sites }) {
           <Th>Site Link</Th>
           <Th>Feedback Link</Th>
           <Th>Date Added</Th>
-          <Th>{""}</Th>
+          <Th />
         </Tr>
       </thead>
       <tbody>
@@ -23,7 +23,7 @@ function SitesTable({ sites }) {
             <Td>
               <Link>View Feedback</Link>
             </Td>
-            <Td>{format(parseISO(createdAt), "PPpp")}</Td>
+            <Td>{format(parseISO(createdAt), 'PPpp')}</Td>
           </Box>
         ))}
       </tbody>

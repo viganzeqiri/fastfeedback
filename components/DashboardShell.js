@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   Breadcrumb,
@@ -9,11 +9,11 @@ import {
   Flex,
   Link,
   Avatar,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import { useAuth } from "@lib/auth";
-import AddSiteModal from "./AddSiteModal";
-import { Logo } from "@icons/logo";
+import { useAuth } from '@lib/auth';
+import { Logo } from '@icons/logo';
+import AddSiteModal from './AddSiteModal';
 
 const DashboardShell = ({ children }) => {
   const { user, signout } = useAuth();

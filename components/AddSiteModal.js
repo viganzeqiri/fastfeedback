@@ -1,7 +1,7 @@
-import { useForm } from "react-hook-form";
-import { createSite } from "@lib/firestore";
-import { useAuth } from "@lib/auth";
-import { mutate } from "swr";
+import { useForm } from 'react-hook-form';
+import { createSite } from '@lib/firestore';
+import { useAuth } from '@lib/auth';
+import { mutate } from 'swr';
 import {
   Modal,
   ModalOverlay,
@@ -16,7 +16,7 @@ import {
   Input,
   useDisclosure,
   useToast,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 function AddSiteModal({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,18 +35,14 @@ function AddSiteModal({ children }) {
     createSite(newSite);
 
     toast({
-      title: "Success.",
-      description: "Site added",
-      status: "success",
+      title: 'Success.',
+      description: 'Site added',
+      status: 'success',
       duration: 5000,
       isClosable: true,
     });
 
-    mutate(
-      "/api/sites",
-      async (data) => ({ sites: [...data.sites, newSite] }),
-      false
-    );
+    mutate('/api/sites', async data => ({ sites: [...data.sites, newSite] }), false);
 
     onClose();
   }
@@ -58,10 +54,10 @@ function AddSiteModal({ children }) {
         backgroundColor="gray.900"
         color="white"
         fontWeight="medium"
-        _hover={{ bg: "gray.700" }}
+        _hover={{ bg: 'gray.700' }}
         _active={{
-          bg: "gray.800",
-          transform: "scale(0.95)",
+          bg: 'gray.800',
+          transform: 'scale(0.95)',
         }}
       >
         {children}
@@ -75,12 +71,7 @@ function AddSiteModal({ children }) {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>Name</FormLabel>
-              <Input
-                ref={initialRef}
-                placeholder="My site"
-                name="name"
-                ref={register({ required: "Required" })}
-              />
+              <Input placeholder="My site" name="name" ref={register({ required: 'Required' })} />
             </FormControl>
 
             <FormControl mt={4}>
@@ -88,7 +79,7 @@ function AddSiteModal({ children }) {
               <Input
                 placeholder="https://foo.com"
                 name="url"
-                ref={register({ required: "Required" })}
+                ref={register({ required: 'Required' })}
               />
             </FormControl>
           </ModalBody>
@@ -97,12 +88,7 @@ function AddSiteModal({ children }) {
             <Button onClick={onClose} mr={3} fontWeight="medium">
               Cancel
             </Button>
-            <Button
-              background="#99FFFE"
-              color="#194D4C"
-              fontWeight="medium"
-              type="submit"
-            >
+            <Button background="#99FFFE" color="#194D4C" fontWeight="medium" type="submit">
               Add
             </Button>
           </ModalFooter>

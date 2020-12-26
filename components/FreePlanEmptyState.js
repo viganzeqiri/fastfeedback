@@ -1,6 +1,6 @@
-import React from "react";
-import { Heading, Box, Text, Button } from "@chakra-ui/react";
-import DashbpardShell from "./DashboardShell";
+import React from 'react';
+import { Heading, Box, Text, Button } from '@chakra-ui/react';
+import DashbpardShell from './DashboardShell';
 
 function FreePlanEmptyState() {
   return (
