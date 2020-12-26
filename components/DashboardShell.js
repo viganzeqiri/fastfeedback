@@ -1,54 +1,67 @@
 import React from "react";
 import {
-  Flex,
-  Link,
-  Stack,
-  Avatar,
+  Box,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   Heading,
+  Button,
+  Flex,
+  Link,
+  Avatar,
 } from "@chakra-ui/react";
-import { Logo } from "@icons/logo";
+
 import { useAuth } from "@lib/auth";
+import AddSiteModal from "./AddSiteModal";
+import { Logo } from "@icons/logo";
 
-function DashbpardShell({ children }) {
-  const { user } = useAuth();
-
+const DashboardShell = ({ children }) => {
+  const { user, signout } = useAuth();
   return (
-    <Flex flexDirection="column">
-      <Flex
-        backgroundColor="white"
-        justifyContent="space-between"
-        alignItems="center"
-        py={4}
-        px={8}
-      >
-        <Stack spacing={4} isInline alignItems="center">
-          <Logo w="24px" h="24px" />
-          <Link>Feedback</Link>
-          <Link>Sites</Link>
-        </Stack>
-        <Flex alignItems="center">
-          <Link mr={4}>Account</Link>
-          <Avatar size="sm" src={user.photoUrl} />
-        </Flex>
-      </Flex>
-      <Flex backgroundColor="gray.100" p={8} height="100vh">
-        <Flex maxWidth="800px" direction="column" w="100%" ml="auto" mr="auto">
-          <Breadcrumb>
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink color="gray.700" fontSize="sm">
-                Sites
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-          <Heading mb={4}>Sites</Heading>
-          {children}
-        </Flex>
-      </Flex>
-    </Flex>
-  );
-}
+    <Box backgroundColor="gray.100" h="100vh">
+      <Flex backgroundColor="white" mb={16} w="full">
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          pt={4}
+          pb={4}
+          maxW="1250px"
+          margin="0 auto"
+          w="full"
+          px={8}
+          h="70px"
+        >
+          <Flex align="center">
+            <Logo name="logo" size="24px" mr={8} />
+            <Link mr={4}>Sites</Link>
+            <Link>Feedback</Link>
+          </Flex>
 
-export default DashbpardShell;
+          <Flex justifyContent="center" alignItems="center">
+            {user && (
+              <Button variant="ghost" mr={2} onClick={() => signout()}>
+                Log Out
+              </Button>
+            )}
+            <Avatar size="sm" src={user?.photoUrl} />
+          </Flex>
+        </Flex>
+      </Flex>
+
+      <Flex margin="0 auto" direction="column" maxW="1250px" px={8}>
+        <Breadcrumb>
+          <BreadcrumbItem>
+            <BreadcrumbLink>Sites</BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+
+        <Flex justifyContent="space-between">
+          <Heading mb={8}>My Sites</Heading>
+          <AddSiteModal>+ Add Site</AddSiteModal>
+        </Flex>
+        {children}
+      </Flex>
+    </Box>
+  );
+};
+export default DashboardShell;

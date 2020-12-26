@@ -1,4 +1,7 @@
-import { useRef } from "react";
+import { useForm } from "react-hook-form";
+import { createSite } from "@lib/firestore";
+import { useAuth } from "@lib/auth";
+import { mutate } from "swr";
 import {
   Modal,
   ModalOverlay,
@@ -12,33 +15,59 @@ import {
   Button,
   Input,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { createSite } from "@lib/firestore";
 
-function AddSiteModal() {
+function AddSiteModal({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { handleSubmit, register } = useForm();
+  const toast = useToast();
+  const { user } = useAuth();
 
-  const initialRef = useRef();
+  function onCreateSite({ name, url }) {
+    const newSite = {
+      authorId: user.uid,
+      createdAt: new Date().toISOString(),
+      name,
+      url,
+    };
 
-  function onCreateSite(values) {
-    createSite(values);
+    createSite(newSite);
+
+    toast({
+      title: "Success.",
+      description: "Site added",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+
+    mutate(
+      "/api/sites",
+      async (data) => ({ sites: [...data.sites, newSite] }),
+      false
+    );
+
+    onClose();
   }
 
   return (
     <>
       <Button
-        fontWeight="medium"
-        maxW="200px"
-        variant="solid"
-        size="md"
         onClick={onOpen}
+        backgroundColor="gray.900"
+        color="white"
+        fontWeight="medium"
+        _hover={{ bg: "gray.700" }}
+        _active={{
+          bg: "gray.800",
+          transform: "scale(0.95)",
+        }}
       >
-        Add your first site
+        {children}
       </Button>
 
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent as="form" onSubmit={handleSubmit(onCreateSite)}>
           <ModalHeader fontWeight="bold">Add site</ModalHeader>
@@ -49,7 +78,7 @@ function AddSiteModal() {
               <Input
                 ref={initialRef}
                 placeholder="My site"
-                name="site"
+                name="name"
                 ref={register({ required: "Required" })}
               />
             </FormControl>
@@ -58,7 +87,7 @@ function AddSiteModal() {
               <FormLabel>Link</FormLabel>
               <Input
                 placeholder="https://foo.com"
-                name="link"
+                name="url"
                 ref={register({ required: "Required" })}
               />
             </FormControl>
