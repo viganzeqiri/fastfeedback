@@ -21,7 +21,7 @@ function SkeletonRow({ width }) {
   );
 }
 
-function SitesTableSkeleton() {
+export default function SitesTableSkeleton() {
   return (
     <Table>
       <thead>
@@ -43,5 +43,3 @@ function SitesTableSkeleton() {
     </Table>
   );
 }
-
-export default SitesTableSkeleton;

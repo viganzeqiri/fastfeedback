@@ -15,7 +15,7 @@ import { useAuth } from '@lib/auth';
 import { Logo } from '@icons/logo';
 import AddSiteModal from './AddSiteModal';
 
-const DashboardShell = ({ children }) => {
+export default function DashboardShell({ children }) {
   const { user, signout } = useAuth();
   return (
     <Box backgroundColor="gray.100" h="100vh">
@@ -63,5 +63,4 @@ const DashboardShell = ({ children }) => {
       </Flex>
     </Box>
   );
-};
-export default DashboardShell;
+}

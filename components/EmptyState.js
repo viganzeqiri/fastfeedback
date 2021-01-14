@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading, Text, Flex } from '@chakra-ui/react';
 import AddSiteModal from './AddSiteModal';
 
-function EmptyState() {
+export default function EmptyState() {
   return (
     <Flex
       width="100%"
@@ -21,5 +21,3 @@ function EmptyState() {
     </Flex>
   );
 }
-
-export default EmptyState;

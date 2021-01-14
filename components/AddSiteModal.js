@@ -18,7 +18,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 
-function AddSiteModal({ children }) {
+export default function AddSiteModal({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { handleSubmit, register } = useForm();
   const toast = useToast();
@@ -97,5 +97,3 @@ function AddSiteModal({ children }) {
     </>
   );
 }
-
-export default AddSiteModal;

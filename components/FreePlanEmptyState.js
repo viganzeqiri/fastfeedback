@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading, Box, Text, Button } from '@chakra-ui/react';
 import DashbpardShell from './DashboardShell';
 
-function FreePlanEmptyState() {
+export default function FreePlanEmptyState() {
   return (
     <DashbpardShell>
       <Box width="100%" backgroundColor="white" borderRadius="8px" p={8}>
@@ -15,5 +15,3 @@ function FreePlanEmptyState() {
     </DashbpardShell>
   );
 }
-
-export default FreePlanEmptyState;

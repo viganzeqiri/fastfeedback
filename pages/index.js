@@ -18,6 +18,7 @@ export default function Home() {
     >
       <Head>
         <script
+          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: `
               if (document.cookie && document.cookie.includes('fast-feedback-auth')) {
